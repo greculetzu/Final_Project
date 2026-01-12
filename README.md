@@ -20,8 +20,8 @@ This project is an automated IoT system designed to monitor and control the envi
 - [X] Yes. Concept inspired by: [RandomNerdTutorials ESP32 Web Server](https://randomnerdtutorials.com/) + Basic Thermostat Logic.
 
 **What I changed:**
-* [cite_start]**Logic Extension:** Instead of a simple "If Temp < Target Then Heater ON" (Bang-Bang control), I am implementing a hysteresis loop to prevent the relay from switching too rapidly[cite: 234].
-* [cite_start]**Sensor Fusion:** I added an ultrasonic sensor to correlate temperature changes with the physical rise of the dough, creating a "readiness" index, which standard thermostat tutorials do not have[cite: 377].
+* **Logic Extension:** Instead of a simple "If Temp < Target Then Heater ON" (Bang-Bang control), I am implementing a hysteresis loop to prevent the relay from switching too rapidly.
+* **Sensor Fusion:** I added an ultrasonic sensor to correlate temperature changes with the physical rise of the dough, creating a "readiness" index, which standard thermostat tutorials do not have.
 
 ## 4. Architecture & Design (The 5 Questions)
 
