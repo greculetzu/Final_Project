@@ -27,30 +27,29 @@ This project is an automated IoT system designed to monitor and control the envi
 
 ### Q1: What is the system boundary?
 * **Inside the System:** The fermentation box, the ESP32 controller, the sensors (Ultrasonic, DHT), and the heating element relay. The decision to heat or cool happens strictly on the device.
-* **Outside the System:** The user's smartphone/laptop. The phone is used **only** for visualization and setting the target temperature via a web interface. [cite_start]It performs no processing[cite: 346].
+* **Outside the System:** The user's smartphone/laptop. The phone is used **only** for visualization and setting the target temperature via a web interface. It performs no processing.
 * **Boundary:** The HTTP requests over Wi-Fi between the ESP32 and the router.
 
 ### Q2: Where does the intelligence live?
 * **Location:** The intelligence is entirely on the **Edge (ESP32)**.
-* **Reasoning:** The system must maintain temperature reliability even if the Wi-Fi connection is lost. [cite_start]"Distributed intelligence" would make the system fragile. [cite_start]The ESP32 handles the sensor reading loop, the control logic, and the web server simultaneously[cite: 167].
+* **Reasoning:** The system must maintain temperature reliability even if the Wi-Fi connection is lost. "Distributed intelligence" would make the system fragile. The ESP32 handles the sensor reading loop, the control logic, and the web server simultaneously.
 
 ### Q3: What is the hardest technical problem?
 * **The Challenge:** **Sensor Noise & False Positives** on the ultrasonic sensor.
 * **Why:** The condensation inside a fermentation chamber can cause the ultrasonic sensor to give erratic readings (spikes).
-* **Solution:** Implementing a "Moving Average Filter" or a Median Filter in software to smooth out the readings before making logic decisions. [cite_start]This ensures reliability beats ambition[cite: 476].
+* **Solution:** Implementing a "Moving Average Filter" or a Median Filter in software to smooth out the readings before making logic decisions. This ensures reliability beats ambition.
 
 ### Q4: What is the minimum demo?
-* [cite_start]**Success Criterion:** The system powers up, displays the current temperature on the OLED, and switches the Relay ON when I hold an ice pack near the sensor (simulating cold), then turns it OFF when the target is reached[cite: 366].
-* [cite_start]**The "Boringly Reliable" Check:** It must simply maintain temperature between 24°C and 26°C for 5 minutes without crashing[cite: 463].
+* **Success Criterion:** The system powers up, displays the current temperature on the OLED, and switches the Relay ON when I hold an ice pack near the sensor (simulating cold), then turns it OFF when the target is reached.
+* **The "Boringly Reliable" Check:** It must simply maintain temperature between 24°C and 26°C for 5 minutes without crashing.
 
 ### Q5: Why is this not just a tutorial?
 * A tutorial typically shows how to wire *one* sensor or how to blink an LED. This project integrates multiple subsystems (Distance, Temp, Relay, Wi-Fi) that compete for CPU time.
-* [cite_start]It requires making architectural decisions about **non-blocking timing** (using `millis()`) because the ESP32 cannot pause (`delay()`) while maintaining the web server connection[cite: 162, 193].
+* It requires making architectural decisions about **non-blocking timing** (using `millis()`) because the ESP32 cannot pause (`delay()`) while maintaining the web server connection.
 
 ## 5. ESP32 Requirement
 **Do I need an ESP32 provided by the lab?**
 - [X] **YES**
-* **Reason:** The project relies on Wi-Fi connectivity to serve the dashboard. [cite_start]The ESP32 is chosen specifically for its dual-core capability to handle networking and sensor logic simultaneously, which fits the "Connectivity + Simple Control" use case described in the course[cite: 258, 261].
+* **Reason:** The project relies on Wi-Fi connectivity to serve the dashboard. The ESP32 is chosen specifically for its dual-core capability to handle networking and sensor logic simultaneously, which fits the "Connectivity + Simple Control" use case.
 
 ## 6. Project Visuals
-*(Place your block diagram here - e.g., Sensor -> ESP32 -> Relay)*
